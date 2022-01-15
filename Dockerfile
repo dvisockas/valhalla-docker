@@ -1,7 +1,7 @@
 FROM valhalla/valhalla:run-3.1.3
 
 RUN apt update
-RUN apt-get -y install wget
+RUN apt-get -y install wget python3-distutils
 
 
 COPY ./valhalla-config.json .
@@ -10,8 +10,6 @@ COPY ./tile-links.txt .
 # Download tiles
 # TODO: Check sha of file and invalidate layer if changed
 RUN for i in $(cat tile-links.txt); do wget $i; done
-
-RUN apt-get -y install python3-distutils python3-apt
 
 RUN mkdir -p valhalla_tiles
 RUN valhalla_build_config --mjolnir-tile-dir ${PWD}/valhalla_tiles --mjolnir-tile-extract ${PWD}/valhalla_tiles.tar --mjolnir-timezone ${PWD}/valhalla_tiles/timezones.sqlite --mjolnir-admin ${PWD}/valhalla_tiles/admins.sqlite > valhalla.json
