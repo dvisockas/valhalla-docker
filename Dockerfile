@@ -8,7 +8,6 @@ COPY ./valhalla-config.json .
 COPY ./tile-links.txt .
 
 # Download tiles
-# TODO: Check sha of file and invalidate layer if changed
 RUN for i in $(cat tile-links.txt); do wget $i; done
 
 RUN mkdir -p valhalla_tiles
