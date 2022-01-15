@@ -1,4 +1,4 @@
-FROM valhalla/valhalla:run-3.1.3
+FROM valhalla/valhalla:run-3.1.4
 
 RUN apt update
 RUN apt-get -y install wget python3-distutils
